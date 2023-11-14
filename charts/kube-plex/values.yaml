@@ -155,15 +155,15 @@ persistence:
     # Optionally specify claimName to manually override the PVC to be used for
     # the transcode directory. If claimName is specified, storageClass and size
     # are ignored.
-    ## claimName: "plex-transcode-pvc"
+    claimName: "plex-transcode-pvc"
     # Optionally specify a storage class to be used for the transcode directory.
     # If not specified and claimName is not specified, the default storage
     # class will be used.
-    storageClass: "local-storage"
+    # storageClass: ""
     # subPath: some-subpath
     # The requested size of the volume to be used when creating a
     # PersistentVolumeClaim.
-    size: 20Gi
+    # size: 20Gi
     # Access mode for this volume
     accessMode: ReadWriteMany
   data:
