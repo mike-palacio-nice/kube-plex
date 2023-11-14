@@ -39,10 +39,12 @@ kubePlex:
 
 
 # Override this with the plex claim token from plex.tv/claim
-claimToken: ""
+claimToken:
+  secretName: plex-claim-secret
+  secretKey: claimKey
 
 # Set the timezone of the plex server
-timezone: Europe/London
+timezone: America/Chicago
 
 # Set extra environment variables
 extraEnv: {}
@@ -70,7 +72,7 @@ service:
   ## Use loadBalancerIP to request a specific static IP,
   ## otherwise leave blank
   ##
-  loadBalancerIP:
+  loadBalancerIP: 192.168.1.61
   # loadBalancerSourceRanges: []
   ## Set the externalTrafficPolicy in the Service to either Cluster or Local
   # externalTrafficPolicy: Cluster
@@ -121,18 +123,22 @@ probes:
       failureThreshold: 30
 
 ingress:
-  enabled: false
+  enabled: true
   # Used to create an Ingress record.
   hosts:
-    - chart-example.local
+    - plex.palacpl.us
   annotations:
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    external-dns.alpha.kubernetes.io/hostname: plex.palacpl.us
+    external-dns.alpha.kubernetes.io/ttl: "120" #optional
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
   tls:
     # Secrets must be manually created in the namespace.
-    # - secretName: chart-example-tls
-    #   hosts:
-    #     - chart-example.local
+    - secretName: chart-example-tls
+      hosts:
+        - plex.palacpl.us
 
 rbac:
   create: true
@@ -145,6 +151,7 @@ nodeSelector:
 
 persistence:
   transcode:
+    enabled: true
     # Optionally specify claimName to manually override the PVC to be used for
     # the transcode directory. If claimName is specified, storageClass and size
     # are ignored.
@@ -163,15 +170,15 @@ persistence:
     # Optionally specify claimName to manually override the PVC to be used for
     # the data directory. If claimName is specified, storageClass and size are
     # ignored.
-    ## claimName: "plex-data-pvc"
+    claimName: "plex-pvc"
     # Optionally specify a storage class to be used for the data directory.
     # If not specified and claimName is not specified, the default storage
     # class will be used.
-    storageClass: ""
-    # subPath: some-subpath
+    # storageClass: ""
+    subPath: media
     # The requested size of the volume to be used when creating a
     # PersistentVolumeClaim.
-    size: 40Gi
+    # size: 40Gi
     # Access mode for this volume
     accessMode: ReadWriteMany
   extraData: []
@@ -185,15 +192,15 @@ persistence:
     # Optionally specify claimName to manually override the PVC to be used for
     # the config directory. If claimName is specified, storageClass and size
     # are ignored.
-    ## claimName: "plex-config-pvc"
+    claimName: "plex-config-pvc"
     # Optionally specify a storage class to be used for the config directory.
     # If not specified and claimName is not specified, the default storage
     # class will be used.
     # subPath: some-subpath
-    storageClass: ""
+    # storageClass: ""
     # The requested size of the volume to be used when creating a
     # PersistentVolumeClaim.
-    size: 20Gi
+    # size: 20Gi
     # Access mode for this volume
     accessMode: ReadWriteMany
 

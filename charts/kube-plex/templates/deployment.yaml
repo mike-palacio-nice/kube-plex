@@ -111,7 +111,10 @@ spec:
           value: "{{ .Values.timezone }}"
         # TODO: move this to a secret?
         - name: PLEX_CLAIM
-          value: "{{ .Values.claimToken }}"
+          valueFrom:
+            secretKeyRef:
+              name: "{{ Values.claimToken.secretName }}"
+              key: "{{ Values.claimToken.secretKey }}"
         # kube-plex env vars
         - name: POD_NAME
           valueFrom:
