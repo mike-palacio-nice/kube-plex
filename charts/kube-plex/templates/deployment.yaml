@@ -113,8 +113,8 @@ spec:
         - name: PLEX_CLAIM
           valueFrom:
             secretKeyRef:
-              name: "{{ Values.claimToken.secretName }}"
-              key: "{{ Values.claimToken.secretKey }}"
+              name: "{{ .Values.claimToken.secretName }}"
+              key: "{{ .Values.claimToken.secretKey }}"
         # kube-plex env vars
         - name: POD_NAME
           valueFrom:
