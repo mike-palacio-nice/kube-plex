@@ -136,7 +136,7 @@ ingress:
     external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
   tls:
     # Secrets must be manually created in the namespace.
-    - secretName: chart-example-tls
+    - secretName: secure-tls
       hosts:
         - plex.palacpl.us
 
