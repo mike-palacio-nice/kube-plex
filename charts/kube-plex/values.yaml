@@ -124,6 +124,7 @@ probes:
 
 ingress:
   enabled: true
+  ingressClassName: "nginx"
   # Used to create an Ingress record.
   hosts:
     - plex.palacpl.us
