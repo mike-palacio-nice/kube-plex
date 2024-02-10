@@ -26,11 +26,11 @@ kubePlex:
     # Limits and requests that are applied to the kube-plex transcoding pod. Can
     # be used to request GPU instances for pods as well as normal Kubernetes
     # limits.
-    requests:
-      cpu: 100m
-      amd.com/gpu: 1
-    limits:
-      amd.com/gpu: 1
+    # requests:
+    #   cpu: 100m
+    #   amd.com/gpu: 1
+    # limits:
+    #   amd.com/gpu: 1
 
   # Mounts which should be carried over to kube-plex transcoder. By default only
   # /data and /transcode are cloned to the transcoding pod. A comma separated list.
