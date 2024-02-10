@@ -17,7 +17,7 @@ image:
 
 kubePlex:
   enabled: true
-  loglevel: ""
+  loglevel: "DEBUG"
   image:
     repository: ghcr.io/ressu/kube-plex
     tag: latest
