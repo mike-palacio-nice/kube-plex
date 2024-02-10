@@ -23,6 +23,7 @@ kubePlex:
     tag: latest
     pullPolicy: Always
   resources:
+    {}
     # Limits and requests that are applied to the kube-plex transcoding pod. Can
     # be used to request GPU instances for pods as well as normal Kubernetes
     # limits.
