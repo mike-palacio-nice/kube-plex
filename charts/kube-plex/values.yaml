@@ -55,7 +55,7 @@ extraEnv:
   NVIDIA_DRIVER_CAPABILITIES: video,compute,utility
 
 # Set the runtime class
-runtimeClassName: nvidia
+# runtimeClassName: nvidia
 
 service:
   type: LoadBalancer
