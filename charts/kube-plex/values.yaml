@@ -29,9 +29,11 @@ kubePlex:
     # limits.
     requests:
       cpu: 100m
+      memory: 5Gi
       amd.com/gpu: 1
     limits:
       amd.com/gpu: 1
+      memory: 5Gi
 
   # Mounts which should be carried over to kube-plex transcoder. By default only
   # /data and /transcode are cloned to the transcoding pod. A comma separated list.
@@ -51,8 +53,8 @@ extraEnv:
   # {}
   # puid: 1002
   # pgid: 1002
-  NVIDIA_VISIBLE_DEVICES: all
-  NVIDIA_DRIVER_CAPABILITIES: video,compute,utility
+  # NVIDIA_VISIBLE_DEVICES: all
+  # NVIDIA_DRIVER_CAPABILITIES: video,compute,utility
 
 # Set the runtime class
 # runtimeClassName: nvidia
@@ -153,11 +155,11 @@ nodeSelector:
 
 persistence:
   transcode:
-    enabled: true
+    enabled: false
     # Optionally specify claimName to manually override the PVC to be used for
     # the transcode directory. If claimName is specified, storageClass and size
     # are ignored.
-    claimName: "plex-transcode-pvc"
+    # claimName: "plex-transcode-pvc"
     # Optionally specify a storage class to be used for the transcode directory.
     # If not specified and claimName is not specified, the default storage
     # class will be used.
@@ -165,9 +167,9 @@ persistence:
     # subPath: some-subpath
     # The requested size of the volume to be used when creating a
     # PersistentVolumeClaim.
-    # size: 20Gi
+    # size: 5Gi
     # Access mode for this volume
-    accessMode: ReadWriteMany
+    # accessMode: ReadWriteMany
   data:
     # Optionally specify claimName to manually override the PVC to be used for
     # the data directory. If claimName is specified, storageClass and size are
